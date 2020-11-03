@@ -1,6 +1,28 @@
-from tkinter import *
+from tkinter import * #Imports Tkinter
+import sys #Imports sys, used to end the program later
+
 from tkinter import messagebox
 import random as r
+root=Tk() #Declares root as the tkinter main window
+#top =  #Creates the toplevel window
+master=Tk()
+entry1 = Entry(master,bg="papaya whip",width=10,font=('arial',24,'bold'),relief="sunken",bd=3) #Username entry
+entry2 = Entry(master,bg="papaya whip",width=10,font=('arial',24,'bold'),relief="sunken",bd=3) #Password entry
+button1 = Button(master,width=6,font=('arial',24,'bold'),relief="sunken",bd=3,text="Login", command=lambda:command1()) #Login button
+button2 = Button(master,width=6,font=('arial',24,'bold'),relief="sunken",bd=3,text="Cancel", command=lambda:command2()) #Cancel button
+lbl=Label(master,text="UserName",font=('arial',24,'bold'),bg="papaya whip",width=10,relief="sunken",bd=3)
+lbl2=Label(master,text="Pass",font=('arial',24,'bold'),bg="papaya whip",width=10,relief="sunken",bd=3)
+lbl3=Label(master,text="Please enter your default credential to play this game",font=('arial',24,'bold'),bg="papaya whip",width=50,relief="sunken",bd=3)
+def command1():
+    if entry1.get() == "user" and entry2.get() == "pass": #Checks whether username and password are correct
+        root.deiconify() #Unhides the root window
+        master.destroy() #Removes the toplevel window
+
+def command2():
+    master.destroy() #Removes the toplevel window
+    root.destroy() #Removes the hidden root window
+    sys.exit() #Ends the script
+
 def button(frame):          #Function to define a button
     b=Button(frame,padx=1,bg="papaya whip",width=3,text="   ",font=('arial',60,'bold'),relief="sunken",bd=10)
     return b
@@ -44,10 +66,21 @@ def Quit():
         msg = messagebox.askquestion("Quit", "Do you want to quit ??")
         if msg == 'yes' :
            root.destroy()
+           sys.exit()
         else :
             messagebox.showinfo('Returning','Return to your game')
+
+
 ###############   Main Program #################
-root=Tk()                   #Window defined
+master.title("Welcome to login page")
+entry1.grid(row=100,column=8,columnspan=5) #These pack the elements, this includes the items for the main window
+entry2.grid(row=150,column=8,columnspan=5)
+button1.grid(row=200,column=7,columnspan=5)
+button2.grid(row=250,column=7,columnspan=5)
+
+lbl.grid(row=100,column=6,columnspan=5)
+lbl2.grid(row=150,column=6,columnspan=5)
+lbl3.grid(row=1,column=6,columnspan=5)
 root.title("Tic-Tac-Toe by Sadique , Akash and Subodh")   #Title given
 a=r.choice(['O','X'])       #Two operators defined
 colour={'O':"deep sky blue",'X':"lawn green"}
@@ -67,4 +100,7 @@ B1.grid(row=0,column=7,columnspan=5)
 B2.grid(row=0,column=12,columnspan=6)
 B3.grid(row=0,column=22,columnspan=6)
 
-root.mainloop()
+
+
+root.withdraw() #This hides the main window, it's still present it just can't be seen or interacted with
+root.mainloop() #Starts the event loop for the main window
